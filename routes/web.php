@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('frontend.index');
 });
 
-Route::get('/backend', function () {
+Route::get('/backend/home', function () {
     return view('backend.index');
 });
+
+Route::resource('/backend/category', 'CategoryController');

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
 
 
 Route::get('/', function () {
@@ -9,9 +9,15 @@ Route::get('/', function () {
 });
 
 Route::get('/backend/home', function () {
-    return view('backend.index');
+    return view('backend.template');
 });
-Route::resource('/backend/category', 'CategoryController');
+
+Auth::routes();
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('/backend/category', 'CategoryController');
+    Route::resource('/backend/user', 'UserController');
+});
 
 Auth::routes();
 

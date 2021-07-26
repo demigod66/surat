@@ -1,4 +1,4 @@
-@extends('backend.index')
+@extends('backend.template')
 @section('content')
 
     <div class="row">
@@ -17,6 +17,7 @@
                             <tr>
                                 <th width="10%">No</th>
                                 <th>Nama Kategori</th>
+                                <th>Jabatan</th>
                                 <th width="10%">Aksi</th>
                             </tr>
                         </thead>

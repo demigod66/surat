@@ -8,8 +8,8 @@
                         <img class="img-40 img-radius" src="{{ asset('backend/assets/images/avatar-4.jpg') }}"
                             alt="User-Profile-Image">
                         <div class="user-details">
-                            <span>John Doe</span>
-                            <span id="more-details">UX Designer<i class="ti-angle-down"></i></span>
+                            <span>{{ Auth::user()->name }}</span>
+                            <span id="more-details">Administrator<i class="ti-angle-down"></i></span>
                         </div>
                     </div>
 
@@ -32,7 +32,7 @@
                 </div>
                 <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Layout</div>
                 <ul class="pcoded-item pcoded-left-item">
-                    <li class="active">
+                    <li class=" ">
                         <a href="index.html">
                             <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                             <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
@@ -82,6 +82,12 @@
 
                         </ul>
                     </li>
+                    <li class=" ">
+                        <a href="{{ route('user.index') }}">
+                            <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Data Pegawai</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
                 </ul>
-
         </nav>

@@ -17,6 +17,10 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('/backend/category', 'CategoryController');
     Route::resource('/backend/user', 'UserController');
+    Route::resource('/backend/suratmasuk','SuratMasukController');
+    Route::resource('/backend/klasifikasi', 'KlasifikasiController');
+    Route::post('/klasifikasi.import', 'KlasifikasiController@import');
+    Route::get('/backend/suratmasuk/file/{id}', 'SuratMasukController@getFile');
 });
 
 Auth::routes();

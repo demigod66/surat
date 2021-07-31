@@ -65,7 +65,7 @@
                         </a>
                         <ul class="pcoded-submenu">
                             <li class=" ">
-                                <a href="#">
+                                <a href="{{ route('suratmasuk.index') }}">
                                     <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                     <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Surat Masuk</span>
                                     <span class="pcoded-mcaret"></span>
@@ -86,6 +86,13 @@
                         <a href="{{ route('user.index') }}">
                             <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                             <span class="pcoded-mtext" data-i18n="nav.dash.main">Data Pegawai</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="{{ route('klasifikasi.index') }}">
+                            <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Klasifikasi</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>

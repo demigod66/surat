@@ -35,32 +35,14 @@
                     <li class=" ">
                         <a href="index.html">
                             <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Beranda</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
                     <li class="pcoded-hasmenu">
                         <a href="javascript:void(0)">
                             <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Kategori</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                        <ul class="pcoded-submenu">
-                            <li class=" ">
-                                <a href="{{ route('category.index') }}">
-                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Data Kategori</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-
-
-                        </ul>
-                    </li>
-                    <li class="pcoded-hasmenu">
-                        <a href="javascript:void(0)">
-                            <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Arsip Surat</span>
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Transaksi Surat</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                         <ul class="pcoded-submenu">
@@ -72,22 +54,38 @@
                                 </a>
                             </li>
                             <li class=" ">
-                                <a href="#">
+                                <a href="{{ route('suratkeluar.index') }}">
                                     <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                     <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Surat Keluar</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
-
-
                         </ul>
                     </li>
-                    <li class=" ">
-                        <a href="{{ route('user.index') }}">
-                            <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Data Pegawai</span>
+                    <li class="pcoded-hasmenu">
+                        <a href="javascript:void(0)">
+                            <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Buku Agenda</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
+                        <ul class="pcoded-submenu">
+                            <li class=" ">
+                                <a href="{{ route('suratmasuk.agenda') }}">
+                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Agenda Surat Masuk</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="pcoded-submenu">
+                            <li class=" ">
+                                <a href="{{ route('suratkeluar.agenda') }}">
+                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Agenda Surat Keluar</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class=" ">
                         <a href="{{ route('klasifikasi.index') }}">
@@ -96,5 +94,18 @@
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
-                </ul>
-        </nav>
+                    <li class=" ">
+                        <a href="{{ route('instansi.index') }}">
+                            <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Instansi</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="{{ route('user.index') }}">
+                            <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                            <span class="pcoded-mtext" data-i18n="nav.dash.main">User</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                </nav>

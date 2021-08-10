@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Storage;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\File\File;
+use App\Models\Instansi;
+use Illuminate\Support\Str;
 
 use Yajra\DataTables\Facades\DataTables;
-
-use PDF;
 use App\Models\Klasifikasi;
 use App\Models\SuratMasuk;
+use PDF;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
 class SuratMasukController extends Controller
@@ -26,19 +25,16 @@ class SuratMasukController extends Controller
         if (Request()->ajax()) {
             return DataTables::of($suratmasuk)
                 ->addIndexColumn()
-                ->addColumn('filemasuk', function ($suratmasuk) {
-                    // return '<p>uploads/suratmasuk/'.$suratmasuk->id.'<p>';
-                    return '<a href="'.asset($suratmasuk->file_masuk).'" target="_blank">Aaa</a>';
-                })
                 ->addColumn('action', function ($row) {
 
-                    $btn =  '<a href="'.route('suratmasuk.edit', $row->id).'" title="Edit" class="edit btn btn-primary btn-sm"><i class="ti-pencil-alt"></i></a>';
+                    $btn =  '<a href="'.route('suratmasuk.edit', $row->id).'" title="Ubah" class="edit btn btn-primary btn-sm"><i class="ti-pencil-alt"></i></a>';
+                    $btn = $btn . ' <a href="'.asset($row->file_masuk).'" title="Unduh" class="edit btn btn-warning btn-sm"><i class="ti-import"></i></a>';
 
-                    $btn = $btn . ' <a href="javascript:void(0)" title="Delete" class="btn btn-danger btn-sm" onClick="hapus(' . $row->id . ')"><i class="ti-trash"></i></a>';
+                    $btn = $btn . ' <a href="javascript:void(0)" title="Hapus" class="btn btn-danger btn-sm" onclick="hapus('."'".$row->id."'".')"><i class="ti-trash"></i></a>';
 
                     return $btn;
                 })
-                ->rawColumns(['action','filemasuk'])
+                ->rawColumns(['action'])
                 ->make(true);
         }
         return view('backend.surat_masuk.index');
@@ -96,20 +92,18 @@ class SuratMasukController extends Controller
             'filemasuk' => 'mimes:png,jpg,docx,pdf'
         ]);
 
+
         if ($request->has('filemasuk')) {
-            $file_masuk = $request->file_masuk;
-            $new_file = time() . $file_masuk->getClientOriginalName();
-            $file_masuk->move('uploads/suratmasuk/', $new_file);
+            $file = $request->filemasuk;
+            $new_file = Str::random(16) .$file->getClientOriginalName();
+            $file->move('uploads/suratmasuk/', $new_file);
             $suratmasuk = SuratMasuk::findorfail($id);
 
             if ($suratmasuk->file_masuk != '') {
                 unlink($suratmasuk->file_masuk);
             }
 
-            $file_data['filemasuk'] = 'uploads/suratmasuk'. $new_file;
-
-
-
+            $file_data['file_masuk'] = 'uploads/suratmasuk/'. $new_file;
             SuratMasuk::whereId($id)->update($file_data);
             echo json_encode(["status" => TRUE]);
 
@@ -125,8 +119,27 @@ class SuratMasukController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $suratmasuk = SuratMasuk::findOrFail($id);
+        unlink($suratmasuk->file_masuk);
+        $suratmasuk->delete();
+
+        echo json_encode(["status" => TRUE]);
     }
 
+    //  agenda surat masuk
+    public function agenda(){
 
+        $suratmasuk = SuratMasuk::all();
+        return view('backend.surat_masuk.agenda', compact('suratmasuk'));
+    }
+
+    // cetak agenda berbentuk pdf
+    public function agendamasuk_pdf(){
+        $inst = Instansi::first();
+        $suratmasuk = SuratMasuk::all();
+        $pdf = PDF::loadview('backend.surat_masuk.printagenda', compact('suratmasuk','inst'))->setPaper('A4','potrait');
+        return $pdf->stream( "agenda-suratmasuk.pdf", array("Attachment" => false));
+        exit(0);
+
+    }
 }

@@ -73,29 +73,6 @@
 
 <script text="text/javascript">
 
-$(document).ready(function(){
-    $("#thumbnail").on('change', function(){
-      thumbnail(this);
-    });
-  })
-  function thumbnail(input) {
-    if (input.files && input.files[0]) {
-      var thumnail_preview = $('#thumbnail-preview');
-      thumnail_preview.empty();
-      var reader = new FileReader();
-      reader.onload = function(e) {
-        $("<img />", {
-          "src": e.target.result,
-          "class": "preview-img pb-3",
-          "width": "300",
-          "height": "300"
-        }).appendTo(thumnail_preview);
-      }
-      thumnail_preview.show();
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
-
 
   function simpan(){
     const nosurat = $('#no_surat').val();

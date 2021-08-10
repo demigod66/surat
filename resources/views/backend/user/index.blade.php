@@ -31,4 +31,47 @@
 </div>
 
 
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        table = $('#example2').DataTable({
+            processing: true,
+            serverside: true,
+            ajax: "{{ route('user.index') }}",
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                },
+                {
+                    data: 'name',
+                    name: 'name'
+                },
+                {
+                    data: 'email',
+                    name: 'email'
+                },
+                {
+                    data: 'jabatan',
+                    name: 'jabatan'
+                },
+                {
+                    data: 'no_hp',
+                    name: 'no_hp'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                },
+            ],
+            order: [
+                [0, 'asc']
+            ]
+        });
+    });
+
+
+    </script>
 @endsection

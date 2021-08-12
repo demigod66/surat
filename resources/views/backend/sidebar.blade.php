@@ -1,111 +1,139 @@
-<div class="pcoded-main-container">
-    <div class="pcoded-wrapper">
-        <nav class="pcoded-navbar">
-            <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
-            <div class="pcoded-inner-navbar main-menu">
-                <div class="">
-                    <div class="main-menu-header">
-                        <img class="img-40 img-radius" src="{{ asset('backend/assets/images/avatar-4.jpg') }}"
-                            alt="User-Profile-Image">
-                        <div class="user-details">
-                            <span>{{ Auth::user()->name }}</span>
-                            <span id="more-details">Administrator<i class="ti-angle-down"></i></span>
-                        </div>
-                    </div>
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="/halaman" class="brand-link">
+      <img src="{{ asset('backend/assets/dist/img/smansabanko.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">SMAN 1 BANGKO</span>
+    </a>
 
-                    <div class="main-menu-content">
-                        <ul>
-                            <li class="more-details">
-                                <a href="#"><i class="ti-user"></i>View Profile</a>
-                                <a href="#!"><i class="ti-settings"></i>Settings</a>
-                                <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Logout</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="pcoded-search">
-                    <span class="searchbar-toggle"> </span>
-                    <div class="pcoded-search-box ">
-                        <input type="text" placeholder="Search">
-                        <span class="search-icon"><i class="ti-search" aria-hidden="true"></i></span>
-                    </div>
-                </div>
-                <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Layout</div>
-                <ul class="pcoded-item pcoded-left-item">
-                    <li class=" ">
-                        <a href="index.html">
-                            <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Beranda</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li>
-                    <li class="pcoded-hasmenu">
-                        <a href="javascript:void(0)">
-                            <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Transaksi Surat</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                        <ul class="pcoded-submenu">
-                            <li class=" ">
-                                <a href="{{ route('suratmasuk.index') }}">
-                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Surat Masuk</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                            <li class=" ">
-                                <a href="{{ route('suratkeluar.index') }}">
-                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Surat Keluar</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="pcoded-hasmenu">
-                        <a href="javascript:void(0)">
-                            <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
-                            <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Buku Agenda</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                        <ul class="pcoded-submenu">
-                            <li class=" ">
-                                <a href="{{ route('suratmasuk.agenda') }}">
-                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Agenda Surat Masuk</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="pcoded-submenu">
-                            <li class=" ">
-                                <a href="{{ route('suratkeluar.agenda') }}">
-                                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Agenda Surat Keluar</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class=" ">
-                        <a href="{{ route('klasifikasi.index') }}">
-                            <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Klasifikasi</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li>
-                    <li class=" ">
-                        <a href="{{ route('instansi.index') }}">
-                            <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Instansi</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li>
-                    <li class=" ">
-                        <a href="{{ route('user.index') }}">
-                            <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                            <span class="pcoded-mtext" data-i18n="nav.dash.main">User</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    </li>
-                </nav>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{{ asset('backend/assets/dist/img/user.png') }}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+        </div>
+      </div>
+
+      @if(Auth::user()->tipe == 1 || Auth::user()->tipe == 0)
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+         <li class="nav-header">BERANDA</li>
+         <li class="nav-item">
+          <a href="/home" class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              Dashboard
+            </p>
+          </a>
+        </li>
+        @endif
+        @if(Auth::user()->tipe == 1)
+        <li class="nav-header">Profil Instansi</li>
+          <li class="nav-item">
+            <a href="{{ route('instansi.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-home"></i>
+              <p>
+                Instansi
+              </p>
+            </a>
+          </li>
+          @endif
+        @if(Auth::user()->tipe == 1)
+        <li class="nav-header">ARSIP</li>
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Arsip Surat
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('suratmasuk.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Surat Masuk</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('suratkeluar.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Surat Keluar</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          @endif
+          @if(Auth::user()->tipe == 1 || Auth::user()->tipe == 0)
+          <li class="nav-item">
+            <a href="{{ route('arsipguru.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Arsip Staff/Guru
+              </p>
+            </a>
+          </li>
+          @endif
+          @if(Auth::user()->tipe == 1)
+          <li class="nav-item">
+            <a href="{{ route('ijazah.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Arsip Ijazah
+              </p>
+            </a>
+          </li>
+          @endif
+          @if(Auth::user()->tipe == 1)
+          <li class="nav-header">Agenda</li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Agenda
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('suratmasuk.agenda') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Agenda Surat Masuk</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('suratkeluar.agenda') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Agenda Surat Keluar</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          @endif
+          @if(Auth::user()->tipe == 1)
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-cog"></i>
+              <p>
+                Setting
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('user.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Manajemen User</p>
+                </a>
+              </li>
+          @endif
+      </ul>
+
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+  </aside>

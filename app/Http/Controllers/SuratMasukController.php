@@ -10,27 +10,32 @@ use App\Models\Klasifikasi;
 use App\Models\SuratMasuk;
 use PDF;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class SuratMasukController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
+
     public function index()
     {
+        if( Auth::user()->tipe == 1 ){
         $suratmasuk = SuratMasuk::all();
         if (Request()->ajax()) {
             return DataTables::of($suratmasuk)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
 
-                    $btn =  '<a href="'.route('suratmasuk.edit', $row->id).'" title="Ubah" class="edit btn btn-primary btn-sm"><i class="ti-pencil-alt"></i></a>';
-                    $btn = $btn . ' <a href="'.asset($row->file_masuk).'" title="Unduh" class="edit btn btn-warning btn-sm"><i class="ti-import"></i></a>';
+                    $btn =  '<a href="'.route('suratmasuk.edit', $row->id).'" title="Ubah" class="edit btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>';
+                    $btn = $btn . ' <a href="'.asset($row->file_masuk).'" title="Unduh" class="edit btn btn-warning btn-sm"><i class="fas fa-download"></i></a>';
 
-                    $btn = $btn . ' <a href="javascript:void(0)" title="Hapus" class="btn btn-danger btn-sm" onclick="hapus('."'".$row->id."'".')"><i class="ti-trash"></i></a>';
+                    $btn = $btn . ' <a href="javascript:void(0)" title="Hapus" class="btn btn-danger btn-sm" onclick="hapus('."'".$row->id."'".')"><i class="fas fa-trash"></i></a>';
 
                     return $btn;
                 })
@@ -38,6 +43,11 @@ class SuratMasukController extends Controller
                 ->make(true);
         }
         return view('backend.surat_masuk.index');
+    }
+        else {
+            return view('backend.error');
+        }
+
     }
 
     /**
@@ -47,12 +57,18 @@ class SuratMasukController extends Controller
      */
     public function create()
     {
+        if( Auth::user()->tipe == 1 ){
         $klasifikasi = Klasifikasi::all();
         return view('backend.surat_masuk.create' , compact('klasifikasi'));
+        }
+        else {
+            return view('backend.error');
+        }
     }
 
     public function store(Request $request)
     {
+        if( Auth::user()->tipe == 1 ){
         $this->validate($request,[
             'file_masuk' => 'required|max:2048'
         ]);
@@ -74,20 +90,25 @@ class SuratMasukController extends Controller
         $file_masuk->move('uploads/suratmasuk/', $new_file);
 
         echo json_encode(["status" => TRUE]);
-
+    }else {
+        return view('backend.error');
+    }
     }
 
     public function edit($id)
     {
+        if( Auth::user()->tipe == 1 ){
         $klasifikasi = Klasifikasi::all();
         $suratmasuk = SuratMasuk::findorfail($id);
         return view('backend.surat_masuk.edit', compact('suratmasuk','klasifikasi'));
+        }
+        else {
+            return view('backend.error');
+        }
     }
 
     public function update(Request $request, $id)
     {
-
-
         $request->validate([
             'filemasuk' => 'mimes:png,jpg,docx,pdf'
         ]);
@@ -111,12 +132,6 @@ class SuratMasukController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $suratmasuk = SuratMasuk::findOrFail($id);
@@ -128,9 +143,13 @@ class SuratMasukController extends Controller
 
     //  agenda surat masuk
     public function agenda(){
-
+        if( Auth::user()->tipe == 1 ){
         $suratmasuk = SuratMasuk::all();
         return view('backend.surat_masuk.agenda', compact('suratmasuk'));
+        }
+        else {
+            return view('backend.error');
+        }
     }
 
     // cetak agenda berbentuk pdf

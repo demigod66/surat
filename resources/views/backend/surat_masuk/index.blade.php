@@ -1,36 +1,38 @@
+
 @extends('backend.template')
+@section('sub-judul','Surat Masuk')
+@section('halaman-sekarang','Surat Masuk')
 @section('content')
 
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="float-right">
-                        <a href="{{ route('suratmasuk.create') }}" class="btn btn-primary btn-sm"><i
-                                class="ti-pencil-alt"></i>Tambah</a>
-                    </div>
-                </div>
-
-                <div class="card-body">
-                    <table id="example2" class="table table-bordered table-hover table-responsive">
-                        <thead>
-                            <tr>
-                                <th width="10%">No</th>
-                                <th>Kode</th>
-                                <th>No. Surat</th>
-                                <th>Tgl. Surat</th>
-                                <th>Tgl. Diterima</th>
-                                <th>Keterangan</th>
-                                <th width="10%">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+<div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="float-right">
+            <a href="{{ route('suratmasuk.create') }}" class="btn btn-primary btn-flat btn-sm"><i class="fas fa-plus"></i> Tambah</a>
+          </div>
         </div>
+
+        <div class="card-body">
+          <table id="example2" class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th width="10%">No</th>
+                <th>Kode</th>
+                <th>No. Surat</th>
+                <th>Tgl. Surat</th>
+                <th>Tgl. Diterima</th>
+                <th>Keterangan</th>
+                <th width="10%">Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
+</div>
 
 
 

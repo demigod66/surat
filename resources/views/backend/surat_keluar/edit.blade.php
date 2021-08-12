@@ -1,4 +1,6 @@
 @extends('backend.template')
+@section('sub-judul','Edit Surat Keluar')
+@section('halaman-sekarang','Edit Surat Keluar')
 @section('content')
 
 <div class="row">

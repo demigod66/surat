@@ -10,11 +10,7 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ArsipGuruController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $user = Auth::user()->tipe == 1 ? User::all() : User::select('id', 'name')->where('tipe', 0)->get();
@@ -23,7 +19,7 @@ class ArsipGuruController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
 
-                    $btn =  '<a href="'.route('arsipguru.show', $row->id).'" data-toggle="tooltip" data-original-title="Edit" class="edit btn btn-primary btn-sm editCategory">Edit</a>';
+                    $btn =  '<a href="'.route('arsipguru.show', $row->id).'" data-toggle="tooltip" data-original-title="Edit" class="edit btn btn-primary btn-sm editCategory"><i class="fas fa-edit"></i></a>';
 
                     return $btn;
                 })

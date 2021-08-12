@@ -1,4 +1,6 @@
 @extends('backend.template')
+@section('sub-judul','Agenda Surat Keluar')
+@section('halaman-sekarang','Agenda Surat Keluar')
 @section('content')
 
 

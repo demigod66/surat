@@ -6,6 +6,7 @@ use App\Models\Instansi;
 use App\Models\Klasifikasi;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use PDF;
 
 
@@ -14,23 +15,20 @@ use Illuminate\Http\Request;
 
 class SuratKeluarController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
+        if( Auth::user()->tipe == 1 ){
         $suratkeluar = SuratKeluar::all();
         if (Request()->ajax()) {
             return DataTables::of($suratkeluar)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
 
-                    $btn =  '<a href="'.route('suratkeluar.edit', $row->id).'" title="Ubah" class="edit btn btn-primary btn-sm"><i class="ti-pencil-alt"></i></a>';
-                    $btn = $btn . ' <a href="'.asset($row->filekeluar).'" title="Unduh" class="edit btn btn-warning btn-sm"><i class="ti-import"></i></a>';
+                    $btn =  '<a href="'.route('suratkeluar.edit', $row->id).'" title="Ubah" class="edit btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>';
+                    $btn = $btn . ' <a href="'.asset($row->filekeluar).'" title="Unduh" class="edit btn btn-warning btn-sm"><i class="fas fa-download"></i></a> ';
 
-                    $btn = $btn . ' <a href="javascript:void(0)" title="Hapus" class="btn btn-danger btn-sm" onclick="hapus('."'".$row->id."'".')"><i class="ti-trash"></i></a>';
+                    $btn = $btn . ' <a href="javascript:void(0)" title="Hapus" class="btn btn-danger btn-sm" onclick="hapus('."'".$row->id."'".')"><i class="fas fa-trash"></i></a>';
 
                     return $btn;
                 })
@@ -38,18 +36,29 @@ class SuratKeluarController extends Controller
                 ->make(true);
         }
         return view('backend.surat_keluar.index');
+        }
+
+        else {
+            return view('backend.error');
+        }
     }
 
 
     public function create()
     {
+        if( Auth::user()->tipe == 1 ){
         $klasifikasi = Klasifikasi::all();
         return view('backend.surat_keluar.create', compact('klasifikasi'));
+        }
+        else {
+            return view('backend.error');
+        }
     }
 
 
     public function store(Request $request)
     {
+        if( Auth::user()->tipe == 1 ){
         $this->validate($request, [
             'filekeluar' => 'mimes:png,jpg,jpeg,png,pdf,docx,doc'
         ]);
@@ -71,41 +80,34 @@ class SuratKeluarController extends Controller
         $filekeluar->move('uploads/suratkeluar/', $new_file);
 
         echo json_encode(["status" => TRUE]);
+        }
+        else {
+            return view('backend.error');
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
+        if( Auth::user()->tipe == 1 ){
         $suratkeluar = SuratKeluar::findorfail($id);
         $klasifikasi = Klasifikasi::all();
         return view('backend.surat_keluar.edit', compact('suratkeluar','klasifikasi'));
+        }
+        else {
+            return view('backend.error');
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
+        if( Auth::user()->tipe == 1 ){
         $request->validate([
             'filekeluar' => 'mimes:png,jpg,docx,pdf'
         ]);
@@ -126,15 +128,14 @@ class SuratKeluarController extends Controller
             echo json_encode(["status" => TRUE]);
 
         }
+    }
+    else {
+        return view('backend.error');
+    }
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         $suratkeluar = SuratKeluar::findOrFail($id);
@@ -147,18 +148,26 @@ class SuratKeluarController extends Controller
 
 
     public function agenda(){
-
+        if( Auth::user()->tipe == 1 ){
         $suratkeluar = SuratKeluar::all();
         return view('backend.surat_keluar.agenda', compact('suratkeluar'));
+        }
+        else {
+            return view('backend.error');
+        }
     }
 
 
     public function agendakeluar_pdf(){
-
+        if( Auth::user()->tipe == 1 ){
         $inst = Instansi::first();
         $suratkeluar = SuratKeluar::all();
         $pdf = PDF::loadview('backend.surat_keluar.printagenda', compact('suratkeluar','inst'))->setPaper('A4','potrait');
         return $pdf->stream( "agenda-suratmasuk.pdf", array("Attachment" => false));
         exit(0);
     }
+    else {
+        return view('backend.error');
+    }
+}
 }

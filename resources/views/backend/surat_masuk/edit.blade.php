@@ -1,4 +1,6 @@
 @extends('backend.template')
+@section('sub-judul','Edit Surat Masuk')
+@section('halaman-sekarang','Edit Surat Masuk')
 @section('content')
 
 

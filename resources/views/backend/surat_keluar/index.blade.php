@@ -1,4 +1,6 @@
 @extends('backend.template')
+@section('sub-judul','Surat Keluar')
+@section('halaman-sekarang','Surat Keluar')
 @section('content')
 
 

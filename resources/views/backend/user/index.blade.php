@@ -1,4 +1,6 @@
 @extends('backend.template')
+@section('sub-judul','Manajemen User')
+@section('halaman-sekarang','Manajemen User')
 @section('content')
 
 <div class="row">
@@ -17,8 +19,8 @@
                         <tr>
                             <th width="10%">No</th>
                             <th>Nama Pegawai</th>
-                            <th>Jabatan</th>
-                            <th>No.hp</th>
+                            <th>Email</th>
+                            <th>Tipe User</th>
                             <th width="10%">Aksi</th>
                         </tr>
                     </thead>
@@ -51,13 +53,12 @@
                     data: 'email',
                     name: 'email'
                 },
-                {
-                    data: 'jabatan',
-                    name: 'jabatan'
-                },
-                {
-                    data: 'no_hp',
-                    name: 'no_hp'
+                {data: function (data, type, row, meta) {
+                if(data.tipe == 1) {
+                    return 'Administrator';
+                }
+                return 'Guru';
+                }
                 },
                 {
                     data: 'action',
@@ -71,6 +72,56 @@
             ]
         });
     });
+
+    function hapus(id){
+      swal({
+        title: 'Apakah kamu yakin?',
+        type: 'warning',
+        showCancelButton: true,
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        allowEnterKey: false,
+        confirmButtonText: 'Ya',
+        cancelButtonText: 'Tidak',
+        buttons: true
+      }).then(function(){
+        $.ajax({
+          url : "user/"+id,
+          type: "delete",
+          dataType: "JSON",
+          success: function(){
+            swal({
+              title: 'Berhasil',
+              type: 'success',
+              allowOutsideClick: false,
+              allowEscapeKey: false,
+              allowEnterKey: false,
+            }).then(function(){
+              location.reload();
+            })
+          },
+          error: function (jqXHR, textStatus, errorThrown){
+            swal({
+              title: 'Terjadi kesalahan',
+              type: 'error',
+              allowOutsideClick: false,
+              allowEscapeKey: false,
+              allowEnterKey: false,
+            });
+          }
+        });
+      }, function (dismiss) {
+        if (dismiss === 'cancel') {
+          swal({
+            title: 'Batal',
+            type: 'error',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+          })
+        }
+      });
+    }
 
 
     </script>

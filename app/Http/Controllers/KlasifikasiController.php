@@ -6,7 +6,7 @@ use App\Models\Klasifikasi;
 use Yajra\DataTables\Facades\DataTables;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\KlasifikasiImport;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class KlasifikasiController extends Controller
@@ -14,6 +14,7 @@ class KlasifikasiController extends Controller
 
     public function index()
     {
+        if( Auth::user()->tipe == 1 ){
         $klasifikasi = Klasifikasi::all();
         if (Request()->ajax()) {
             return DataTables::of($klasifikasi)
@@ -31,11 +32,14 @@ class KlasifikasiController extends Controller
         }
         return view('backend.klasifikasi.index');
     }
+    return view('backend.error');
+}
 
 
 
     public function store(Request $request)
     {
+        if( Auth::user()->tipe == 1 ){
         Klasifikasi::updateOrCreate(
             ['id' => $request->id],
             [
@@ -47,11 +51,18 @@ class KlasifikasiController extends Controller
 
         echo json_encode(["status" => TRUE]);
     }
+    return view('backend.error');
+}
 
     public function edit($id)
     {
+        if( Auth::user()->tipe == 1 ){
         $klasifikasi = Klasifikasi::find($id);
         return response()->json($klasifikasi);
+        }
+        else {
+            return view('backend.error');
+        }
     }
 
 
@@ -66,6 +77,7 @@ class KlasifikasiController extends Controller
 
     //function untuk import excel
     public function import(Request $request){
+        if( Auth::user()->tipe == 1 ){
        // validasi
 		$this->validate($request, [
 			'klasifikasi' => 'required|mimes:csv,xls,xlsx'
@@ -76,5 +88,9 @@ class KlasifikasiController extends Controller
 		Excel::import(new KlasifikasiImport, public_path('/klasifikasi_file/'.$nama_file));
         return redirect()->back()->with('sukses', 'Import Data Berhasil');
 		return view('klasifikasi.index');
+    }
+    else {
+        return view('backend.error');
+    }
     }
 }

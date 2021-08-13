@@ -2,7 +2,8 @@
     <!-- Brand Logo -->
     <a href="/halaman" class="brand-link">
       <img src="{{ asset('backend/assets/dist/img/smansabanko.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">SMAN 1 BANGKO</span>
+      <span class="brand-text font-weight-light">SI-MART</span>
+
     </a>
 
     <!-- Sidebar -->
@@ -114,6 +115,7 @@
           </li>
           @endif
           @if(Auth::user()->tipe == 1)
+          <li class="nav-header">Lainnya</li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-cog"></i>

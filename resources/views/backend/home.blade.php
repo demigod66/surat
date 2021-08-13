@@ -1,6 +1,14 @@
 @extends('backend.template')
 @section('title', 'Home')
 @section('content')
+
+
+<div class="text-center">
+    <h3 style="font-family:Lobster Two"><u>SELAMAT DATANG DI SISTEM INFORMASI ARSIP SURAT SMANSA</u></h3>
+</div>
+
+
+<div class="pt-4">
 <div class="row">
     <div class="col-lg-3 col-6">
       <!-- small box -->
@@ -79,6 +87,7 @@
     </div>
   </div>
   <!-- ./col -->
+</div>
 </div>
 
 

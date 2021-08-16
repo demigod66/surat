@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Instansi;
 use App\Models\SuratKeluar;
 use App\Models\SuratMasuk;
 use Illuminate\Http\Request;
@@ -32,6 +33,7 @@ class HomeController extends Controller
         $ijazahcount = DB::table('ijazah')->count();
         $userscount = DB::table('users')->count();
         $ijazahcount = DB::table('ijazah')->count();
-        return view('backend.home', compact('suratmasukcount','suratkeluarcount','arsipgurucount','ijazahcount','userscount','ijazahcount'));
+        $instansi = Instansi::where('id', 10)->first();
+        return view('backend.home', compact('suratmasukcount','suratkeluarcount','arsipgurucount','ijazahcount','userscount','ijazahcount','instansi'));
     }
 }

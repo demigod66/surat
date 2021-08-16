@@ -9,11 +9,16 @@ use Symfony\Component\Mime\Encoder\EncoderInterface;
 class InstansiController extends Controller
 {
 
+    public function show(){
+        $instansi = Instansi::where('id',10)->first();
+        return view('backend.instansi.index', compact('instansi'));
+    }
+
 
     public function index()
     {
         $instansi = Instansi::where('id', 10)->first();
-        return view('backend.instansi.index', compact('instansi') );
+        return view('backend.instansi.show', compact('instansi') );
     }
 
     public function update(Request $request, $id)
@@ -53,12 +58,7 @@ class InstansiController extends Controller
 
 
 
-
         }
-
-
-
-
 
     }
 

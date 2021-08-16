@@ -7,13 +7,15 @@ use App\Models\{User, ArsipGuru};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Session;
 
 class ArsipGuruController extends Controller
 {
 
     public function index()
     {
-        $user = Auth::user()->tipe == 1 ? User::all() : User::select('id', 'name')->where('tipe', 0)->get();
+        $id = Session::has('users');
+        $user = Auth::user()->tipe == 1 ? User::all() : User::select('id', 'name')->where('id', Auth::user()->id )->get();
         if (Request()->ajax()) {
             return DataTables::of($user)
                 ->addIndexColumn()
@@ -48,7 +50,7 @@ class ArsipGuruController extends Controller
     public function store(Request $request)
     {
         foreach ($request->file as $f) {
-            $file = Str::random(16).'.'.$f->extension();
+            $file = $f->getClientOriginalName().'.'.$f->extension();
             $f->move('uploads/arsipguru/', $file);
 
             ArsipGuru::Create([
@@ -73,37 +75,12 @@ class ArsipGuruController extends Controller
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+    public function destroy($id){
+
+        $arsip = ArsipGuru::findorfail($id);
+        $arsip->delete();
+
+        return redirect()->back()->with('success','Arsip Berhasil Dihapus');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

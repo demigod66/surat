@@ -39,7 +39,6 @@
                     <small id="validatedCustomFile" class="text-danger">
                         Pastikan file anda ( jpg,jpeg,png ) !!!
                     </small>
-                    <div id="thumbnail-preview"></div>
                 </div>
                 <button type="button" onclick="simpan()" class="btn btn-info">Simpan</button>
               </form>
@@ -52,80 +51,5 @@
   </div>
 
 
-
-  <script>
-    function simpan(){
-    const nama = $('#nama').val();
-    const alamat = $('#alamat').val();
-    const email = $('#email').val();
-    const file = $('#file').val();
-    if (nama.length == '') {
-      swal({
-        title: 'Nama Pimpinan Wajib Diisi!',
-        type: 'error',
-        allowOutsideClick: false,
-        allowEscapeKey: false,
-        allowEnterKey: false,
-      })
-    }else if (alamat.length == '') {
-      swal({
-        title: 'Alamat wajib diisi!',
-        type: 'error',
-        allowOutsideClick: false,
-        allowEscapeKey: false,
-        allowEnterKey: false,
-      })
-    } else if (email.length == '') {
-      swal({
-        title: 'Email wajib diisi!',
-        type: 'error',
-        allowOutsideClick: false,
-        allowEscapeKey: false,
-        allowEnterKey: false,
-      })
-    }else if (file.length == '') {
-      swal({
-        title: 'Pilih File',
-        type: 'error',
-        allowOutsideClick: false,
-        allowEscapeKey: false,
-        allowEnterKey: false,
-      })
-    } else {
-      $.ajax({
-        url : "{{ route('instansi.update', $instansi->id) }}",
-        type : "POST",
-        data: new FormData($('#form')[0]),
-        dataType: "JSON",
-        async: false,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function(data){
-          swal({
-            title: 'Berhasil',
-            type: 'success',
-            allowOutsideClick: false,
-            allowEscapeKey: false,
-            allowEnterKey: false,
-          })
-          .then(function(){
-            window.location.href = "{{ route('instansi.index') }}";
-          })
-        },
-        error: function (jqXHR, textStatus, errorThrown){
-          swal({
-            title: 'Terjadi kesalahan',
-            type: 'error',
-            allowOutsideClick: false,
-            allowEscapeKey: false,
-            allowEnterKey: false,
-          });
-        }
-      })
-    }
-  }
-
-  </script>
 
 @endsection

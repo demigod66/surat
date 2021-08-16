@@ -83,7 +83,7 @@
                     },
                     {
                         data: 'name',
-                        name: 'nama'
+                        name: 'name'
                     },
                     {
                         data: 'action',

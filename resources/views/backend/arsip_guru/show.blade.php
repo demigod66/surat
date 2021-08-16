@@ -11,7 +11,12 @@
     <img src="{{ asset('backend/assets/dist/img/pdfimage.jpg') }}" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">{{ $a->nama_file }}</h5>
-      <a href="{{ asset('uploads/arsipguru')  }}/{{ $a->nama_file }}" class="btn btn-primary">Lihat/ Download</a>
+      <a href="{{ asset('uploads/arsipguru')  }}/{{ $a->nama_file }}" class="btn btn-primary btn-sm">Lihat/ Download</a>
+      <br><br>
+      <form action="{{ route('arsipguru.destroy', $a->id )}}" method="POST">
+        @csrf
+		@method('delete')
+      <button type="submit" class="btn btn-danger  btn-sm ">Hapus</button>
     </div>
   </div>
 </div>

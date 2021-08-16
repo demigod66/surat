@@ -2,53 +2,82 @@
 @section('sub-judul','Instansi')
 @section('halaman-sekarang','Instansi')
 @section('content')
-<section class="content card" style="padding: 10px 10px 10px 10px ">
-    <h3><i class="nav-icon fas fa-warehouse my-1 btn-sm-1"></i> Profil Instansi</h3>
-    <hr>
-    @if ($instansi->count() >= 1)
-    @foreach ($instansi as $item_ins)
+
+
+
+<section class="content pt-2">
     <div class="row">
-        <div class="col-md-12">
-            <div class="card-body pt-0">
-                <div class="row">
-                    <div class="col-9">
-                        <h3 class="font-weight-bold">{{ $item_ins->nama }}</h3>
-                        <ul class="ml-4 mb-0 fa-ul text-black">
-                            <li class="my-3"><span class="fa-li"><i class="fas fa-lg fa-user-tie"></i></span>
-                                <h4>Pimpinan
-                                    &nbsp;: {{ $item_ins->pimpinan }}</h4>
-                            </li>
-                            <li class="my-3"><span class="fa-li"><i class="fas fa-lg fa-map-marker-alt"></i></span>
-                                <h4>Alamat &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ $item_ins->alamat }}</h4>
-                            </li>
-                            <li><span class="fa-li"><i class="fas fa-lg fa-at"></i></span>
-                                <h4>Email
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ $item_ins->email }}</h4>
-                            </li>
-                        </ul>
-                    </div>
-                    <a src="{{asset($item_ins->file)}}" data-toggle="lightbox" data-title="Lihat Logo Instansi">
-                        <center>
-                            <img id="logo" src="{{asset($item_ins->file)}}" alt="Logo Instansi" class="rounded"
-                                width="200"><br>
-                        </center>
-                    </a>
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header d-flex p-0">
+            <ul class="nav nav-pills p-2">
+              <li class="nav-item"><a class="nav-link active" href="#tab_1" data-toggle="tab">Profil</a></li>
+            </ul>
+          </div>
+          <div class="card-body">
+            @if(session()->has('success'))
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-md-8">
+                  <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h6><i class="icon fas fa-exclamation-triangle"></i> {{ session()->get('success') }}</h6>
+                  </div>
                 </div>
+              </div>
             </div>
-            <hr>
-            <div class="col-12 text-center">
-                <a class="btn btn-primary" href="{{ route('instansi.edit', $item_ins->id) }}" role="button"><i
-                        class="fas fa-edit"></i> Edit Data Instansi</a>
+            @endif
+
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab_1">
+
+                <form action="{{ route('instansi.update', $instansi->id) }}" class="form-horizontal" enctype="multipart/form-data" method="POST">
+                  @csrf
+                  @method('PUT')
+                  <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                      <div class="form-group">
+                        <label for="nama">Nama</label>
+                        <input type="text" name="nama" id="nama" class="form-control" value="{{ $instansi->nama }}" maxlength="15">
+                        <div class="text-danger">@error('nama') {{ $message }} @enderror</div>
+                      </div>
+                      <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" name="email" id="email" class="form-control" value="{{ $instansi->email }}">
+                        <div class="text-danger">@error('email') {{ $message }} @enderror</div>
+                      </div>
+                      <div class="form-group">
+                        <label for="alamat">Alamat</label>
+                        <input type="text" name="alamat" id="alamat" class="form-control" value="{{ $instansi->alamat }}">
+                        <div class="text-danger">@error('alamat') {{ $message }} @enderror</div>
+                      </div>
+                      <div class="form-group">
+                        <label for="sambutan">Pimpinan</label>
+                        <input type="text" name="pimpinan" id="pimpinan" class="form-control" value="{{ $instansi->pimpinan }}">
+                        <div class="text-danger">@error('pimpinan') {{ $message }} @enderror</div>
+                      </div>
+                      <div class="form-group">
+                        <label for="preview">Preview</label>
+                        <div class="row">
+                          <div class="col-12">
+                            <img src="{{ asset($instansi->file) }}" class="img-thumbnail">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="foto">Ganti Logo</label>
+                        <input type="file" name="file" id="file" class="form-control" accept=".jpg, .png, .jpeg">
+                      </div>
+                      <button class="btn btn-primary" type="submit">Simpan</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
             </div>
-        </div>
-    </div>
-    @endforeach
-    @else
-    <div class="col-md-6">
-        <a class="btn btn-primary btn-md" href="{{ route('instansi.create') }}" role="button"><i
-                class="fas fa-plus"></i> Setting Data Instansi</a>
-    </div>
-    @endif
-</section>
+  </section>
 
 @endsection

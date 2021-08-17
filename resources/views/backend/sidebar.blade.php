@@ -68,6 +68,16 @@
             </ul>
           </li>
           @endif
+          @if(Auth::user()->tipe == 1)
+          <li class="nav-item">
+            <a href="{{ route('klasifikasi.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Klasifikasi Surat
+              </p>
+            </a>
+          </li>
+          @endif
           @if(Auth::user()->tipe == 1 || Auth::user()->tipe == 0)
           <li class="nav-item">
             <a href="{{ route('arsipguru.index') }}" class="nav-link">

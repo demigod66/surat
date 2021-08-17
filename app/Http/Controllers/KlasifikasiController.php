@@ -21,9 +21,9 @@ class KlasifikasiController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
 
-                    $btn =  '<a href="javascript:void(0)" data-toggle="tooltip"  onClick="get(' . $row->id . ')" data-original-title="Edit" class="edit btn btn-primary btn-sm editCategory">Edit</a>';
+                    $btn =  '<a href="javascript:void(0)" data-toggle="tooltip"  onClick="get(' . $row->id . ')" data-original-title="Edit" class="edit btn btn-primary btn-sm editCategory"><i class="fas fa-edit"></i></a>';
 
-                    $btn = $btn . ' <a href="javascript:void(0)" title="Delete" class="btn btn-danger btn-sm" onClick="hapus(' . $row->id . ')"><i class="ti-trash"></i></a>';
+                    $btn = $btn . ' <a href="javascript:void(0)" title="Delete" class="btn btn-danger btn-sm" onClick="hapus(' . $row->id . ')"><i class="fas fa-trash"></i></a>';
 
                     return $btn;
                 })
@@ -39,7 +39,6 @@ class KlasifikasiController extends Controller
 
     public function store(Request $request)
     {
-        if( Auth::user()->tipe == 1 ){
         Klasifikasi::updateOrCreate(
             ['id' => $request->id],
             [
@@ -50,8 +49,7 @@ class KlasifikasiController extends Controller
         );
 
         echo json_encode(["status" => TRUE]);
-    }
-    return view('backend.error');
+
 }
 
     public function edit($id)
@@ -77,7 +75,6 @@ class KlasifikasiController extends Controller
 
     //function untuk import excel
     public function import(Request $request){
-        if( Auth::user()->tipe == 1 ){
        // validasi
 		$this->validate($request, [
 			'klasifikasi' => 'required|mimes:csv,xls,xlsx'
@@ -88,9 +85,6 @@ class KlasifikasiController extends Controller
 		Excel::import(new KlasifikasiImport, public_path('/klasifikasi_file/'.$nama_file));
         return redirect()->back()->with('sukses', 'Import Data Berhasil');
 		return view('klasifikasi.index');
-    }
-    else {
-        return view('backend.error');
-    }
+
     }
 }

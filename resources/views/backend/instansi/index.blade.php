@@ -39,7 +39,7 @@
         </div>
     </div>
     <div class="col-md-6">
-        <a class="btn btn-primary btn-md" href="{{ route('instansi.index') }}" role="button"><i
+        <a class="btn btn-primary btn-md" href="{{ route('instansi.show', $instansi->id) }}" role="button"><i
                 class="fas fa-plus"></i> Setting Data Instansi</a>
     </div>
 </section>

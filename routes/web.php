@@ -30,6 +30,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/backend/user', 'UserController');
     Route::resource('backend/arsipguru', 'ArsipGuruController');
     Route::resource('/backend/ijazah' , 'IjazahController');
+    Route::get('/user/profil', 'ProfilUserController@profil');
+    Route::post('/user/update-profil/{id}', 'ProfilUserController@ubah_profil');
+    Route::get('/user/password', 'ProfilUserController@password');
+    Route::post('/user/ubah-password', 'ProfilUserController@ubah_password');
 
 });
 Auth::routes();

@@ -11,10 +11,10 @@
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ asset('backend/assets/dist/img/user.png') }}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{ asset(Auth::user()->foto) }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+          <a href="{{ url('user/profil') }}" class="d-block">{{ Auth::user()->name }}</a>
         </div>
       </div>
 
@@ -142,6 +142,18 @@
                 </a>
               </li>
           @endif
+          <li class="nav-item">
+            <a href="{{ url('user/profil') }}" class="nav-link">
+              <i class="fas fa-user-cog nav-icon"></i>
+              <p>Profil</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('user/password') }}" class="nav-link">
+              <i class="fas fa-user-cog nav-icon"></i>
+              <p>Password</p>
+            </a>
+          </li>
       </ul>
 
     </nav>

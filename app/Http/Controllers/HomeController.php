@@ -6,6 +6,7 @@ use App\Models\Instansi;
 use App\Models\SuratKeluar;
 use App\Models\SuratMasuk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -34,6 +35,7 @@ class HomeController extends Controller
         $userscount = DB::table('users')->count();
         $ijazahcount = DB::table('ijazah')->count();
         $instansi = Instansi::where('id', 10)->first();
-        return view('backend.home', compact('suratmasukcount','suratkeluarcount','arsipgurucount','ijazahcount','userscount','ijazahcount','instansi'));
+        $user = Auth::user();
+        return view('backend.home', compact('suratmasukcount','suratkeluarcount','arsipgurucount','ijazahcount','userscount','ijazahcount','instansi','user'));
     }
 }

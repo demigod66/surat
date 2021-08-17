@@ -4,7 +4,7 @@
 
 
 <div class="text-center">
-    <h3 style="font-family:Lobster Two"><u>SELAMAT DATANG DI SISTEM INFORMASI ARSIP SURAT SMANSA</u></h3>
+    <h3 style="font-family:Lobster Two">SELAMAT DATANG DI SISTEM INFORMASI ARSIP SURAT SMAN 1 BANGKO</h3>
 </div>
 
 

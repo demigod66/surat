@@ -20,7 +20,7 @@ class ArsipGuruController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
 
-                    $btn =  '<a href="'.route('arsipguru.show', $row->id).'" data-toggle="tooltip" data-original-title="Edit" class="edit btn btn-primary btn-sm editCategory"><i class="fas fa-edit"></i></a>';
+                    $btn =  '<a href="'.route('arsipguru.show', $row->id).'" data-toggle="tooltip" data-original-title="Edit" class="edit btn btn-warning btn-sm "><i class="fas fa-eye"></i></a>';
 
                     return $btn;
                 })

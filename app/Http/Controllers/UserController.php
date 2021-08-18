@@ -58,12 +58,20 @@ class UserController extends Controller
             }else {
                 $password = bcrypt(123456);
             }
+
+            $foto = $request->foto;
+            $new_foto = time(). $foto->getClientOriginalName();
+
             User::create([
                 'name' => $request->nama_user,
                 'email' => $request->email,
                 'tipe' => $request->tipe,
+                'foto' => 'uploads/foto/' .$new_foto,
                 'password' =>  $password
             ]);
+
+
+            $foto->move('uploads/foto/', $new_foto);
 
 
         echo json_encode(["status" => TRUE]);

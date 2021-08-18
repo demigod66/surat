@@ -40,6 +40,12 @@
                     <label>Password</label>
                     <input type="password" class="form-control" name="password" id="password" required>
                   </div>
+                  <div class="form-group">
+                    <label for="" class="col-sm-2">Foto</label>
+                    <div class="col-sm-12">
+                      <input type="file" class="form-control" name="foto" accept=".jpg,.png,.jpeg">
+                    </div>
+                  </div>
                 <button type="button" onclick="simpan()" class="btn btn-info">Simpan</button>
               </form>
             </div>
